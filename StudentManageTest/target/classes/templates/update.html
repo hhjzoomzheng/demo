@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title >${stu.id}</title>
+</head>
+<body>
+<form action="studentUpdate" method="post" th:each="stu:${update}" enctype="multipart/form-data">
+		<input name="id" type="hidden" th:value="${stu.id}"/><br> 
+		姓名: <input name="name" type="text" th:value="${stu.name}" placeholder="请输入姓名" required/><br>
+		学号:<input name="stuNo" type="text" th:value="${stu.stuNo}" required/><br>
+		性别: 男<input type="radio" name="sex" value="1" checked>
+                       女 <input type="radio" name="sex" value="0"><br>
+		出生日期:<input name="borndate" type="date"  th:value="${stu.borndate}" required/><br>
+		出生地:<input name="nativePlace" type="text"  th:value="${stu.nativePlace}" required/><br>
+		毕业状态:毕业<input type="radio" name="graduate" value="1">
+                             未毕业 <input type="radio" name="graduate" value="0"checked><br>
+		手机号:<input name="phone" type="text" th:value="${stu.phone}" required/><br>		
+		 头像上传:<input type="file" name="headPicload" value="选择头像" accept="image/*">
+                <button type="submit">修改</button>
+	</form>
+
+</body>
+</html>

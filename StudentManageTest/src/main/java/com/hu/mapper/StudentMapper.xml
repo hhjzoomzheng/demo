@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hu.mapper.StudentMapper">
+	<!-- 注册方法 -->
+	<insert id="regist" parameterType="java.util.Map">
+		insert into student
+		(id,grade_id,register_time) values(#{id},#{gradeId},now())
+	</insert>
+
+	<!-- 学生列表 -->
+	<select id="studentList" resultMap="studentListMap">
+		select *
+		from student
+	</select>
+
+	<!-- 学生详情修改 -->
+	<update id="update" parameterType="com.hu.model.Student">
+		update student
+		set
+		name=#{name},stu_no=#{stuNo},native_place=#{nativePlace},graduate=#{graduate},borndate=#{borndate},phone=#{phone},head_pic=#{headPic},sex=#{sex}
+		where id=#{id}
+	</update>
+
+	<!-- 学生详情查询 -->
+	<select id="select" resultMap="studentMap">
+		select
+		*
+		from
+		student
+		where
+		id=#{id}
+	</select>
+
+	<!-- 条件搜索 -->
+	<select id="selectName" resultMap="studentListMap">
+		select name,head_pic,sex,register_time,id
+		from student
+		<where>
+		<if test="name != null and name != ''">
+		        and
+				name
+				like '%${name}%'
+		</if>
+		<if test="beginDate != null  and endDate != null">			
+				and		
+				register_time
+				between #{beginDate} and #{endDate}
+		</if>
+		<if test="phone != null and phone != ''">		
+				and
+				phone
+				like '${phone}%'
+		</if>
+		</where>
+
+	</select>
+	<!--删除学生 -->
+	<delete id="deleteStudents">
+		delete from student
+		where id=#{id};
+	</delete>
+	<delete id="deleteAccount">
+		delete from account
+		where id=#{id};
+	</delete>
+	<!-- 详情对象 -->
+	<resultMap id="studentMap" type="com.hu.model.Student">
+		<result property="id" column="id" />
+		<result property="registerTime" column="register_time" />
+		<result property="name" column="name" />
+		<result property="stuNo" column="stu_no" />
+		<result property="borndate" column="borndate" />
+		<result property="nativePlace" column="native_place" />
+		<result property="sex" column="sex" />
+		<result property="graduate" column="graduate" />
+		<result property="phone" column="phone" />
+		<result property="headPic" column="head_pic" />
+		<result property="gradeId" column="grade_id" />
+	</resultMap>
+
+	<!-- 列表对象 -->
+	<resultMap id="studentListMap" type="com.hu.model.Student">
+		<result property="registerTime" column="register_time" />
+		<result property="name" column="name" />
+		<result property="sex" column="sex" />
+		<result property="headPic" column="head_pic" />
+	</resultMap>
+
+
+
+</mapper>

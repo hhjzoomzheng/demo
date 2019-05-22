@@ -1,0 +1,21 @@
+savePathString: D:\\sutdentmanage\\headPic
+spring:
+  thymeleaf:
+    mode: LEGACYHTML5
+    encoding: utf-8
+    cache: false
+    enabled: true
+    prefix: classpath:/templates/
+    suffix: .html
+  datasource:
+    url: jdbc:mysql://localhost:3306/studentmanage?useSSL=false&serverTimezone=GMT%2B8    
+    username: root
+    password: 123456    
+  servlet:
+    multipart:
+      location: D:\sutdentmanage\headPic
+      max-file-size: 1MB
+      max-request-size: 1MB
+logging:
+  level: 
+    com.hu.mapper: debug

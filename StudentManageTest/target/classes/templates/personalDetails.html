@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<body>	
+		<table id="table" style="text-align: center;" border="1px" cellpadding="5" cellspacing="0">
+			<thead>
+				<tr>
+				    <th>头像 </th>
+					<th>学号</th>
+					<th>姓名</th>
+					<th>性别</th>					
+					<th>班级id</th>
+					<th>籍贯</th>					
+					<th>电话</th>
+					<th>毕业状态</th>
+					<th>注册时间</th>
+					<th>出生日期</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tr th:each="stu:${personalDetails}">
+			    <td><img th:src="@{/sutdentmanage/headPic/{filename}(filename=${stu.headPic})}"width="90" height="90"/></td>
+			    <td th:text="${stu.stuNo}"></td>				
+				<td th:text="${stu.name}"></td>				
+				<td>
+				<div th:switch="${stu.sex}">				
+                <p th:case="true">男<p>
+                <p th:case="false">女<p>
+                </div>
+                </td>
+                <td th:text="${stu.gradeId}"></td>
+                <td th:text="${stu.nativePlace}"></td>
+                <td th:text="${stu.phone}"></td>               
+                <td>
+				<div th:switch="${stu.graduate}">
+					<p th:case="true">毕业</p>
+					<p th:case="false">未毕业</p>					
+				</div>
+			    </td>
+                <td th:text="${stu.registerTime}"></td>
+                <td th:text="${stu.borndate}"></td>	
+				<td><input type="button" th:onclick= "fun([[${stu.id}]])" value="修改"/>		
+			</tr>											
+		</table><br>
+		<input type="button" th:onclick= "window.location.href='return'" value="返回首页"/>	
+</body>
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript">
+		function fun(kkk) {
+			window.location.href="update?id="+kkk
+			}
+		</script>
+</html>

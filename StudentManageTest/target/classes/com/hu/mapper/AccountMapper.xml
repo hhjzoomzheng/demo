@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hu.mapper.AccountMapper">
+	<!-- 登录功能 -->
+	<select id="login" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		select * from account where 1=1
+		<if test="account!=null and account !='' ">
+			and account=#{account}
+		</if>
+		<if test="password != null and password != null">
+			and password=#{password}
+		</if>
+	</select>
+
+	<!-- 注册方法 -->
+	<insert id="regist" parameterType="java.util.Map">
+		insert into account
+		(id,account,password,register_time,status) values(#{id},#{account},#{password},now(),1)
+		
+ 	</insert>
+
+	<!-- 账户查重 -->
+	<select id="select" parameterType="java.util.Map"
+		resultType="java.util.Map">
+		select account from account where 1=1
+		<if test="account != null ">
+			and account=#{account}
+		</if>
+	</select>
+		<!-- Ajax -->
+	<select id="registName" parameterType="com.hu.model.Account"
+		resultType="com.hu.model.Account">
+		select account from account where 1=1
+		<if test="account != null ">
+			and account=#{account}
+		</if>
+	</select>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

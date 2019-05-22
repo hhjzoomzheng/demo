@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<table id="table" style="text-align: center;" border="1px"
+		cellpadding="5" cellspacing="0">
+		<thead>
+			<tr>
+				<th>头像</th>
+				<th>入学时间</th>
+				<th>学生姓名</th>
+				<th>性别</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tr th:each="stu:${studentList}">
+			<!-- 			<td><img th:src="@{${stu.headPic}}" /></td>
+			<td th:text="${stu.registerTime}"></td>
+			<td th:text="${stu.name}"></td>
+			<td>
+				<div th:switch="${stu.sex}">
+					<p th:case="true">男
+					<p>
+					<p th:case="false">女
+					<p>
+				</div>
+			</td>
+			<td><input type="button" th:onclick="fun([[${stu.id}]])"
+				value="个人详情"> <input type="button"
+				th:onclick="fun1([[${stu.id}]])" value="删除学生"></td> -->
+		</tr>
+	</table>
+	<br>
+	<input id="name_up" name="name" type="text" placeholder="请输入学生姓名" />
+	<input id="phone_up" type="text" name="phone" placeholder="请输入电话号码" />
+	<input id="begin_date" type="date" name="beginDate" placeholder="开始时间" />
+	<input id="end_date" type="date" name="endDate" placeholder="结束时间" />
+	<input id="select_id" type="button" value="搜索" th:onclick="query()" />
+	<br>
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript">
+		function fun(kkk) {
+			window.location.href = "personalDetails?id=" + kkk
+		}
+		function fun1(kkk) {
+			window.location.href = "deleteStudent?id=" + kkk
+		}
+		$(function() {
+			query();
+		})
+		function query() {
+
+			var name = $("#name_up").val();
+			var phone = $("#phone_up").val();
+			var beginDate = $("#begin_date").val();
+			var endDate = $("#end_date").val();
+			var data = "name=" + name + "&phone=" + phone + "&beginDate="
+					+ beginDate + "&endDate=" + endDate;
+			$.ajax({
+				type : "post",
+				url : "selectName",
+				data : data,
+				success : function(data) {
+ 					var account = data.list;  					
+					$(".tabtr").remove();					
+						for (var i = 0; i < data.length; i++) {
+							kkk=data[i].id
+							if(data[i].sex){var s = '男'}
+							else{var s = '女'}
+							var row = '<tr class="tabtr">' + '<td>'+"<img src=/sutdentmanage/headPic/"
+									+ data[i].headPic+" "+ "width='70' height='100'/>"+ '</td>' + '<td>'
+									+ data[i].registerTime + '</td>'
+									+ '<td>' + data[i].name + '</td>'
+									+'<td>' 
+									+ s										
+									+ '</td>' 
+									+'<td>'
+									+'<input type = "button" value = "个人详情" onclick="fun(\''+data[i].id+'\')"/>'
+									+'<input type = "button" value = "删除学生" onclick="fun1('+'kkk'+')"/>'
+									+'</td>'
+							$("#table").append(row);
+						}					
+
+				},
+				error : function(data) {
+					alert("失败了");
+				}
+			});
+		}
+	</script>
+</body>
+</html>

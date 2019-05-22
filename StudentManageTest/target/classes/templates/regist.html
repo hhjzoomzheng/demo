@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<link href="/css/regist.css" rel="stylesheet" type="text/css">
+<head>
+<title>注册页面</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<form action="register" method="post">
+		注册账号：<input id="account_up" name="account" type="text" onblur="check()"required/><span id="hello" class="msg" ></span> 
+		注册密码：<input id="password_up" name="password"type="password" required />
+		<button type="submit">注册账号</button>
+	</form>
+</body>
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript">
+	  function check(){
+		  var account = $("#account_up").val();		   
+		   var data="account="+account;
+		   document.getElementById("hello").innerText = "";
+		   $.ajax({
+			   type:"post",
+			   url: "registName",
+			   data: data,
+			   success:function(data){				   
+				   if(data.account==null){
+					   document.getElementById("hello").innerText = "*该昵称可以使用";				   
+				   }
+				   else{
+					   document.getElementById("hello").innerText = "*该昵称已被占用";
+					   } 					  
+			   },
+			   erro:function(data) {
+					alert("失败了");
+			   }
+		   });
+
+	   }
+	
+	
+	
+	
+	</script>
+</html>
