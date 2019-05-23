@@ -36,21 +36,21 @@
 		select name,head_pic,sex,register_time,id
 		from student
 		<where>
-		<if test="name != null and name != ''">
-		        and
+			<if test="name != null and name != ''">
+				and
 				name
 				like '%${name}%'
-		</if>
-		<if test="beginDate != null  and endDate != null">			
-				and		
+			</if>
+			<if test="beginDate != null  and endDate != null">
+				and
 				register_time
 				between #{beginDate} and #{endDate}
-		</if>
-		<if test="phone != null and phone != ''">		
+			</if>
+			<if test="phone != null and phone != ''">
 				and
 				phone
 				like '${phone}%'
-		</if>
+			</if>
 		</where>
 
 	</select>
@@ -63,6 +63,15 @@
 		delete from account
 		where id=#{id};
 	</delete>
+
+	<select id="selectPic" resultMap="studentMap">
+		select
+		head_pic
+		from
+		student
+		where
+		id=#{id}
+	</select>
 	<!-- 详情对象 -->
 	<resultMap id="studentMap" type="com.hu.model.Student">
 		<result property="id" column="id" />
@@ -85,7 +94,8 @@
 		<result property="sex" column="sex" />
 		<result property="headPic" column="head_pic" />
 	</resultMap>
-
-
+<resultMap id="studentPic" type="com.hu.model.Student">
+		<result property="headPic" column="head_pic" />
+	</resultMap>
 
 </mapper>

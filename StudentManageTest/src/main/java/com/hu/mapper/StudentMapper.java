@@ -8,7 +8,7 @@ import com.hu.model.Student;
 public interface StudentMapper {
 
 	// 注册默认信息
-	Integer regist(Map<String, Object>map);
+	Integer regist(Map<String, Object> map);
 
 	// 学生列表
 	List<Student> studentList();
@@ -22,7 +22,10 @@ public interface StudentMapper {
 	// 查找
 	List<Student> selectName(Student student);
 
-	//删除学生
+	// 删除学生
 	public void deleteStudents(Student student);
+
 	public void deleteAccount(Account account);
+	
+    Student selectPic(Student student);
 }

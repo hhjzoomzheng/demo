@@ -201,5 +201,16 @@ public class studentManageTest {
 			return false;
 		}
 	}
+	
+	@RequestMapping(value="/logout")
+	public ModelAndView logout(HttpServletRequest request,ModelAndView modelAndView){
+		HttpSession session = request.getSession();//获取当前session
+		if(session!=null){
+			request.getSession().removeAttribute("session_user");
+			request.getSession().invalidate();
+		}
+		 modelAndView.setViewName("/index.html");
+		return modelAndView;		
+	}
 
 }
