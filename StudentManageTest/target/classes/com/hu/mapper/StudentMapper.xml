@@ -57,11 +57,11 @@
 	<!--删除学生 -->
 	<delete id="deleteStudents">
 		delete from student
-		where id=#{id};
+		where id=#{id}
 	</delete>
 	<delete id="deleteAccount">
 		delete from account
-		where id=#{id};
+		where id=#{id}
 	</delete>
 
 	<select id="selectPic" resultMap="studentMap">
@@ -94,7 +94,7 @@
 		<result property="sex" column="sex" />
 		<result property="headPic" column="head_pic" />
 	</resultMap>
-<resultMap id="studentPic" type="com.hu.model.Student">
+	<resultMap id="studentPic" type="com.hu.model.Student">
 		<result property="headPic" column="head_pic" />
 	</resultMap>
 

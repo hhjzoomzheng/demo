@@ -11,6 +11,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hu.mapper.StudentMapper;
@@ -86,7 +87,7 @@ public class StudentService {
 	public Student select(Student student) {
 		return studentMapper.select(student);
 	}
-
+	@Transactional
 	public List<Student> selectName(Student student) {
 		return studentMapper.selectName(student);
 	}

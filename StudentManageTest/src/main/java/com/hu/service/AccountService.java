@@ -21,6 +21,12 @@ public class AccountService {
    public Map<String,Object> login(Map<String,Object> map) {
 	   return accountMapper.login(map);
    }
+   
+   /**
+    * 
+    * @param account
+    * @return
+    */
    public Account registName(Account account){
 	   return accountMapper.registName(account);
    }

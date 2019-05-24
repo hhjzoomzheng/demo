@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -109,7 +111,7 @@ public class studentManageTest {
 		modelAndView.setViewName("update");
 		return modelAndView;
 	}
-
+	
 	@RequestMapping("studentUpdate")
 	public String studentUpdate(Model model, Student student, MultipartFile headPicload, BindingResult bindingResult) {
 		studentService.studentUpdate(student, headPicload);
@@ -120,7 +122,6 @@ public class studentManageTest {
 
 	@PostMapping("selectName")
 	@ResponseBody
-	@Transactional
 	public List<Student> selectName(Model model, Student student) {
 		List<Student> list = studentService.selectName(student);
 		model.addAttribute("studentList", list);
@@ -168,7 +169,8 @@ public class studentManageTest {
 	@RequestMapping(value = "getVerify")
 	public void getVerify(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			response.setContentType("image/jpeg");// 设置相应类型,告诉浏览器输出的内容为图片
+			// 设置相应类型,告诉浏览器输出的内容为图片
+			response.setContentType("image/jpeg");
 			response.setHeader("Pragma", "No-cache");// 设置响应头信息，告诉浏览器不要缓存此内容
 			response.setHeader("Cache-Control", "no-cache");
 			response.setDateHeader("Expire", 0);
